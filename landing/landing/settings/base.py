@@ -38,6 +38,8 @@ POSTGRES_HOST = os.environ.get("POSTGRES_HOST")
 
 INSTALLED_APPS = [
     "home",
+    "candidate",
+    "tournament",
     "landing",
     "wagtail",
     "wagtailmetadata",
