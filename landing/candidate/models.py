@@ -7,7 +7,7 @@ class CandidatePage(Page):
     candidate_name = models.CharField(max_length=255)
     election_id = models.CharField()
     party = models.CharField()
-    image = models.ImageField()
+    image = models.ImageField(null=True, blank=True)
     data = models.JSONField() # TODO: Figure the data structure for this field
 
     content_panels = Page.content_panels + [
