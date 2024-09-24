@@ -11,7 +11,7 @@ class VoteForm(forms.Form):
                 (competition.candidate_b.id, competition.candidate_b),
             ]
             self.fields[f'competition_{competition.id}'] = forms.ChoiceField(
-                label=competition.competition_name,
+                label=str(competition.id),
                 choices=candidates,
                 widget=forms.RadioSelect
             )

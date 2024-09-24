@@ -1,15 +1,24 @@
 from django.db import models
 from django.utils import timezone
 
-from wagtail.models import Page
+from wagtail.models import Page, ClusterableModel
+from wagtail.admin.panels import FieldPanel, InlinePanel
+from modelcluster.fields import ParentalKey
 
 
-class Tournament(Page):
-    tournament_name = models.CharField(max_length=255)
-    start_date = models.DateField()
-    end_date = models.DateField()
-    competitions = models.ManyToManyField("tournament.Competition", related_name="tournament_competitions")  
-    vote_interval = models.DurationField()
+class Tournament(Page, ClusterableModel):
+    parent_page_types = ['home.LandingPage']
+
+    start_date = models.DateField(verbose_name="Data de início")
+    end_date = models.DateField(verbose_name="Data de término")
+    vote_interval = models.IntegerField(verbose_name="Intervalo entre os votos (em minutos)", default=15)
+
+    content_panels = Page.content_panels + [
+        FieldPanel("start_date"),
+        FieldPanel("end_date"),
+        FieldPanel("vote_interval"),
+        InlinePanel("competitions", label="Competições")
+    ]
 
     @staticmethod
     def active_tournament():
@@ -26,23 +35,20 @@ class Tournament(Page):
         results = {}
         for competition in self.competitions.all():
             votes = CompetitionVote.objects.filter(competition=competition)
-            
-            results[competition.candidate_a.id] = {
-                "data": competition.candidate_a,
-                "votes": votes.filter(candidate_option=competition.candidate_a).count()
-            }
-            results[competition.candidate_b.id] = {
-                "data": competition.candidate_b,
-                "votes": votes.filter(candidate_option=competition.candidate_b).count()
-            }
+
+            for candidate in [competition.candidate_a, competition.candidate_b]:
+                results[candidate.id] = {
+                    "data": candidate,
+                    "votes": 0
+                }
+
         return results
 
 
 class Competition(models.Model):
-    competition_name = models.CharField(max_length=255)
-    candidate_a = models.ForeignKey('candidate.CandidatePage', on_delete=models.CASCADE, related_name='candidate_a')
-    candidate_b = models.ForeignKey('candidate.CandidatePage', on_delete=models.CASCADE, related_name='candidate_b')
-    tournament = models.ForeignKey('tournament.Tournament', on_delete=models.CASCADE, related_name='competition_tournaments')
+    candidate_a = models.ForeignKey('candidate.Candidate', on_delete=models.CASCADE, related_name='candidate_a')
+    candidate_b = models.ForeignKey('candidate.Candidate', on_delete=models.CASCADE, related_name='candidate_b')
+    tournament = ParentalKey('tournament.Tournament', on_delete=models.CASCADE, related_name='competitions')
 
     def __str__(self):
         return self.competition_name
@@ -50,7 +56,7 @@ class Competition(models.Model):
 
 class CompetitionVote(models.Model):
     competition = models.ForeignKey(Competition, on_delete=models.CASCADE)
-    candidate_option = models.ForeignKey('candidate.CandidatePage', on_delete=models.CASCADE)
+    candidate_option = models.ForeignKey('candidate.Candidate', on_delete=models.CASCADE)
     ip_address = models.GenericIPAddressField(null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
 

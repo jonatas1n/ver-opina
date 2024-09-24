@@ -10,6 +10,8 @@ from tournament.models import Tournament
 from home.views import index, result
 
 class LandingPage(RoutablePageMixin, Page):
+    is_creatable = False
+
     heading = RichTextField(
         null=False,
         blank=False,
