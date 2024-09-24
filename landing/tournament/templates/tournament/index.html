@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/templates/tournament/index.css' %}">
+
+    <div class="container">
+        <div class="tournament">
+          <form method>
+            {% csrf_token %}
+            {{ form.as_p }}
+          </form>
+        </div>

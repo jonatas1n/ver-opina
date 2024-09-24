@@ -1,0 +1,9 @@
+.no-tournament {
+  display: grid;
+  justify-content: center;
+  text-align: center;
+}
+
+.container {
+  padding-block: 3rem;
+}

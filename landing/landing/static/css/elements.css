@@ -1,5 +1,25 @@
 html {overflow-x: hidden;}
 
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--text);
+    background-color: var(--bg);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.box {
+    background-color: var(--bg-box);
+    border: 1px solid var(--text-light);
+    border-radius: 1rem;
+    padding: 1rem;
+    margin-inline: auto;
+    max-width: 75%;
+}
+
 button {
     padding: 10px;
     background-color: var(--dark-blue);
@@ -30,8 +50,7 @@ button:hover:not(:disabled) {
     width: 80%;
     height: 100%;
     margin-inline: auto;
-    max-width: 750px;
-    margin-left: 4.5rem;
+    max-width: 80rem;
 }
 
 .messages li.success {background-color: var(--primary-color);}
@@ -60,16 +79,3 @@ button:hover:not(:disabled) {
 .messages li:last-child {margin-bottom: 0;}
 
 .field-row select {height: 3rem;}
-
-@media (max-width: 1200px) {
-    img {
-        max-width: 100%;
-        height: auto;
-    }
-}
-
-@media (max-width: 1600px) {
-    body {background: unset;}
-
-    .container {margin-left: auto;}
-}

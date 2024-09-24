@@ -1,12 +1,15 @@
 from wagtail.models import Page
 
-from wagtailmetadata.models import MetadataPageMixin
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
+from wagtail.contrib.routable_page.models import RoutablePageMixin, path
 
-class LandingPage(MetadataPageMixin, Page):
-    is_creatable = False
+from django.utils import timezone
+from tournament.models import Tournament
 
+from home.views import index, result
+
+class LandingPage(RoutablePageMixin, Page):
     heading = RichTextField(
         null=False,
         blank=False,
@@ -16,3 +19,23 @@ class LandingPage(MetadataPageMixin, Page):
     content_panels = Page.content_panels + [
         FieldPanel("heading"),
     ]
+
+    @path("")
+    def index(self, request):
+        return index(request)
+    
+    @path("result")
+    def result(self, request):
+        result(request)
+
+    @property
+    def actual_tournament(self):
+        active_tournament = Tournament.active_tournament()
+        if not active_tournament:
+            return None
+        return active_tournament
+    
+    @property
+    def last_result(self):
+        last_tournament = Tournament.objects.filter(end_date__lte=timezone.now()).order_by("-end_date").first()
+        return last_tournament.get_results if last_tournament else None
