@@ -22,8 +22,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 WAGTAILSTREAMFORMS_ENABLE_FORM_PROCESSING = False
 
-DEFAULT_AUTO_FIELD='django.db.models.AutoField'
-
 POSTGRES_PORT = os.environ.get("POSTGRES_PORT", 5432)
 POSTGRES_DB = os.environ.get("POSTGRES_DB")
 POSTGRES_USER = os.environ.get("POSTGRES_USER")
@@ -81,10 +79,6 @@ MIDDLEWARE = [
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
     "allauth.account.middleware.AccountMiddleware",
 ]
-
-WAGTAILSTREAMFORMS_FORM_TEMPLATES = (
-    ("home/surveys/survey.html", "Default Form Template"),
-)
 
 ROOT_URLCONF = "landing.urls"
 
@@ -185,3 +179,7 @@ WAGTAIL_SITE_NAME = "landing"
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = "http://example.com"
+
+
+# Wagtail Admin base URL
+WAGTAILADMIN_BASE_URL = "http://example.com"

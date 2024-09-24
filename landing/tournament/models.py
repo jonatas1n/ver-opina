@@ -80,10 +80,11 @@ class CompetitionVote(models.Model):
     ip_address = models.GenericIPAddressField(null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
 
-    def verify_validity(self):
+    def verify_vote(self):
         is_on_time = self.competition.tournament.start_date <= self.created_at <= self.competition.tournament.end_date
-        last_ip_vote = CompetitionVote.objects.filter(ip_address=self.ip_address).order_by("-created_at").first()
-
+        duration = self.competition.tournament.vote_interval
+        last_ip_vote = CompetitionVote.objects.filter(ip_address=self.ip_address, created_at__gte=timezone.now() - duration).first()
+        return is_on_time and not last_ip_vote
 
     def __str__(self):
         return f"{self.competition} - {self.candidate}"
