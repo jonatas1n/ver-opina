@@ -8,13 +8,11 @@ class CandidatePage(Page):
     election_id = models.CharField()
     party = models.ForeignKey("candidate.Party", on_delete=models.SET_NULL, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
-    data = models.JSONField() # TODO: Figure the data structure for this field
 
     content_panels = Page.content_panels + [
         FieldPanel("candidate_name"),
         FieldPanel("election_id"),
         FieldPanel("party"),
-        FieldPanel("data"),
     ]
 
 class Party(models.Model):
