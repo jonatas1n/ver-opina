@@ -1,27 +1,26 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static candidate_card %}
 
 {% block content %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/templates/tournament/index.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/templates/tournament/tags/candidate_card.css' %}">
 
     <div class="container">
+        <div class="heading">{{ page }}</div>
         <div class="tournament">
+          <button class="tournament__btn prev-btn"><i class="fas fa-4x fa-arrow-left"></i></button>
           <form method>
             {% csrf_token %}
             {% for field in form %}
+            <div class="field__competition">
               {% for option in field %}
-                <div class="card">
-                  <div class="card-header">
-                    {{ option }}
-                    <h2>{{ option.name }}</h2>
-                  </div>
-                  <div class="card-body">
-                    
-                  </div>
-                </div>
+                {% candidate_card option %}
               {% endfor %}
+              <div class="card-vs">VS</div>
+            </div>
             {% endfor %}
           </form>
+          <button class="tournament__btn next-btn"><i class="fas fa-4x fa-arrow-right"></i></button>
         </div>
     </div>
 

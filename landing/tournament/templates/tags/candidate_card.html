@@ -1,0 +1,11 @@
+{% load static %}
+
+<label class="card">
+  <img src="{{ candidate.image_url }}" alt="{{ option.name }}" class="card__image">
+  <h2>{{ candidate.nick }}</h2>
+  <h3>{{ candidate.name }}</h3>
+  <h3>{{ candidate.number }}</h3>
+  <h4>{{ candidate.party }}</h4>
+  <input type="radio" name="candidate" value="{{ candidate.id }}" id="candidate-{{ candidate.id }}" class="card__radio">
+  <button>Escolher</button>
+</label>

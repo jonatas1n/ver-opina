@@ -15,6 +15,9 @@ stop:
 rm:
 	docker compose rm
 
+extract:
+	docker exec -it $(SERVER_CONTAINER) poetry run python manage.py extract
+
 install:
 	docker exec -it $(SERVER_CONTAINER) poetry install
 

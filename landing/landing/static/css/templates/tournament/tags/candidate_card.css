@@ -1,0 +1,32 @@
+.card {
+  display: grid;
+  padding: 1rem;
+  justify-items: center;
+  border-radius: 1rem;
+  border: 1px solid #ddd;
+  background-color: white;
+  color: var(--text);
+  cursor: pointer;
+  text-align: center;
+}
+
+.card__image {
+  aspect-ratio: 1;
+  width: 10rem;
+  border-radius: .5rem;
+  overflow: hidden;
+  object-fit: cover;
+  object-position: top;
+}
+
+.card h2 {
+  margin-top: 1rem;
+}
+
+.card input {
+  visibility: hidden;
+}
+
+.card > * {
+  margin: 0;
+}

@@ -1,0 +1,46 @@
+form {
+  display: grid;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.tournament {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+}
+
+button.tournament__btn {
+  color: var(--text-light);
+}
+
+button.tournament__btn:hover {
+  box-shadow: none;
+  color: var(--text);
+}
+
+form .field__competition {
+  display: grid;
+  grid-template-columns: 24rem 6rem 24rem;
+  justify-content: center;
+
+  background-color: white;
+  padding: 3rem;
+  border-radius: 1rem;
+
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+form .field__competition .card:last-of-type {
+  grid-column: 3;
+}
+
+.card-vs {
+  text-align: center;
+  grid-column: 2;
+  grid-row: 1;
+  font-weight: 900;
+  font-size: 2rem;
+  color: #666;
+  align-self: center;
+}
