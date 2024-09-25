@@ -26,8 +26,7 @@ class VoteForm(forms.Form):
                 competition=competition,
                 candidate_option_id=candidate_id
             )
-            if vote.verify_vote():
-                votes.append(vote)
+            votes.append(vote)
 
         CompetitionVote.objects.bulk_create(votes)
         return votes

@@ -60,4 +60,5 @@
   background-color: var(--primary);
   border-radius: 1rem;
   color: white;
+  text-decoration: none;
 }

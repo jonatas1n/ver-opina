@@ -28,12 +28,21 @@ class Tournament(Page, ClusterableModel):
         return tournament
     
     def is_on_time(self, time=timezone.localtime()):
-        return self.start_date <= time <= self.end_date
+        start_date = timezone.localtime(self.start_date)
+        end_date = timezone.localtime(self.end_date)
+        return start_date <= time <= end_date
+    
+    def can_vote(self, request):
+        if not self.is_on_time():
+            return False
+        access_ip = request.META.get("REMOTE_ADDR")
+        last_vote = CompetitionVote.objects.filter(ip_address=access_ip, created_at__gte=timezone.localtime() - timezone.timedelta(minutes=self.vote_interval)).first()
+        return not last_vote is None
 
     @property
     def get_results(self):
         timezone.localtime()
-        if self.end_date < timezone.localtime():
+        if self.start_date > timezone.localtime():
             return None
         
         results = []
@@ -70,15 +79,6 @@ class CompetitionVote(models.Model):
     candidate_option = models.ForeignKey('candidate.Candidate', on_delete=models.CASCADE)
     ip_address = models.GenericIPAddressField(null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
-
-    def verify_vote(self):
-        tournament = self.competition.tournament
-        is_on_time = tournament.is_on_time(self.created_at)
-        duration = self.competition.tournament.vote_interval
-        duration = timezone.timedelta(minutes=duration)
-
-        last_ip_vote = CompetitionVote.objects.filter(ip_address=self.ip_address, created_at__gte=timezone.localtime() - duration).first()
-        return is_on_time and not last_ip_vote
 
     def __str__(self):
         return f"{self.competition} - {self.candidate}"

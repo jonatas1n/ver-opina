@@ -17,13 +17,14 @@ def index(request):
         return render(request, "tournament/no_tournament.html", data)
     
     if request.method == "GET":
-        if not active_tournament.is_on_time():
+        if not active_tournament.can_vote(request):
+            print("Not on time")
             return redirect("/result")
         form = VoteForm(active_tournament.competitions.all())
         return render(request, "tournament/index.html", {"tournament": active_tournament, "form": form})
     
     form = VoteForm(active_tournament.competitions.all(), request.POST)
-    if form.is_valid():
+    if form.is_valid() and active_tournament.can_vote(request):
         form.save()
         return redirect("/result")
     
@@ -35,6 +36,6 @@ def result(request):
         print("No active tournament")
         return redirect("/")
     
-    can_vote = active_tournament.is_on_time()
+    can_vote = active_tournament.can_vote(request)
     results = active_tournament.get_results
     return render(request, "tournament/result.html", {"tournament": active_tournament, "results": results, "can_vote": can_vote})
