@@ -8,7 +8,19 @@
         <div class="tournament">
           <form method>
             {% csrf_token %}
-            {{ form.as_p }}
+            {% for field in form %}
+              {% for option in field %}
+                <div class="card">
+                  <div class="card-header">
+                    {{ option }}
+                    <h2>{{ option.name }}</h2>
+                  </div>
+                  <div class="card-body">
+                    
+                  </div>
+                </div>
+              {% endfor %}
+            {% endfor %}
           </form>
         </div>
     </div>
