@@ -10,9 +10,14 @@
   text-align: center;
 }
 
+input:checked + .card {
+  border: 1px solid var(--primary);
+  background-color: #82B1FF33;
+}
+
 .card__image {
   aspect-ratio: 1;
-  width: 10rem;
+  width: 12rem;
   border-radius: .5rem;
   overflow: hidden;
   object-fit: cover;
@@ -23,10 +28,23 @@
   margin-top: 1rem;
 }
 
-.card input {
+.label-card input {
   visibility: hidden;
+  position: absolute;
+  width: 0;
+  height: 0;
 }
 
 .card > * {
   margin: 0;
+}
+
+@media screen and (max-width: 1210px) {
+  .candidate__name, .candidate__city {
+    display: none;
+  }
+  
+  .card__image {
+    width: 10rem;
+  }
 }

@@ -6,22 +6,39 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/templates/tournament/tags/candidate_card.css' %}">
 
     <div class="container">
-        <div class="heading">{{ page }}</div>
-        <div class="tournament">
-          <button class="tournament__btn prev-btn"><i class="fas fa-4x fa-arrow-left"></i></button>
-          <form method>
-            {% csrf_token %}
-            {% for field in form %}
-            <div class="field__competition">
-              {% for option in field %}
-                {% candidate_card option %}
-              {% endfor %}
-              <div class="card-vs">VS</div>
-            </div>
+      <div class="heading">{{ page }}</div>
+      <div class="tournament">
+        <button class="tournament__btn prev-btn" disabled onclick="prevCompetition()"><i class="fas fa-4x fa-arrow-left"></i></button>
+        {% if errors %}
+          <ul>
+            {% for error in errors %}
+              <li>{{ error }}</li>
             {% endfor %}
-          </form>
-          <button class="tournament__btn next-btn"><i class="fas fa-4x fa-arrow-right"></i></button>
-        </div>
+          </ul>
+        {% endif %}
+        <form method="post">
+          {% csrf_token %}
+          <div class="fields">
+            {% for field in form %}
+              {% if forloop.first %}
+                <div class="field__competition fade-left selected first">
+              {% elif forloop.last %}
+                <div class="field__competition fade-left last">
+              {% else %}
+                <div class="field__competition fade-left">
+              {% endif %}
+                {% for option in field %}
+                  {% candidate_card option %}
+                {% endfor %}
+                <div class="card-vs">VS</div>
+              </div>
+            {% endfor %}
+          </div>
+          <button class="submit-btn" type="submit">ENVIAR</button>
+        </form>
+        <button class="tournament__btn next-btn" onclick="nextCompetition()"><i class="fas fa-4x fa-arrow-right"></i></button>
+      </div>
     </div>
 
+    <script src="{% static 'js/templates/tournament/index.js' %}"></script>
 {% endblock %}

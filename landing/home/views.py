@@ -8,7 +8,7 @@ def index(request):
     if not active_tournament:
         last_tournament = Tournament.objects.order_by("-end_date").first()
         last_results = last_tournament.get_results if last_tournament else None
-        next_tournament = Tournament.objects.filter(start_date__gte=timezone.now()).order_by("start_date").first()
+        next_tournament = Tournament.objects.filter(start_date__gte=timezone.localtime()).order_by("start_date").first()
         data = {
             "last_tournament": last_tournament,
             "last_results": last_results,
@@ -17,6 +17,8 @@ def index(request):
         return render(request, "tournament/no_tournament.html", data)
     
     if request.method == "GET":
+        if not active_tournament.is_on_time():
+            return redirect("/result")
         form = VoteForm(active_tournament.competitions.all())
         return render(request, "tournament/index.html", {"tournament": active_tournament, "form": form})
     
@@ -30,7 +32,9 @@ def index(request):
 def result(request):
     active_tournament = Tournament.active_tournament()
     if not active_tournament:
+        print("No active tournament")
         return redirect("/")
     
+    can_vote = active_tournament.is_on_time()
     results = active_tournament.get_results
-    return render(request, "tournament/result.html", {"tournament": active_tournament, "results": results})
+    return render(request, "tournament/result.html", {"tournament": active_tournament, "results": results, "can_vote": can_vote})

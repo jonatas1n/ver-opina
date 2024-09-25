@@ -9,8 +9,8 @@ from modelcluster.fields import ParentalKey
 class Tournament(Page, ClusterableModel):
     parent_page_types = ['home.LandingPage']
 
-    start_date = models.DateField(verbose_name="Data de início")
-    end_date = models.DateField(verbose_name="Data de término")
+    start_date = models.DateTimeField(verbose_name="Data de início")
+    end_date = models.DateTimeField(verbose_name="Data de término")
     vote_interval = models.IntegerField(verbose_name="Intervalo entre os votos (em minutos)", default=15)
 
     content_panels = Page.content_panels + [
@@ -22,25 +22,36 @@ class Tournament(Page, ClusterableModel):
 
     @staticmethod
     def active_tournament():
-        tournament = Tournament.objects.filter(start_date__lte=timezone.now(), end_date__gte=timezone.now()).first()
+        tournament = Tournament.objects.filter(start_date__lte=timezone.localtime(), end_date__gte=timezone.localtime()).first()
         if not tournament:
             return None
         return tournament
+    
+    def is_on_time(self, time=timezone.localtime()):
+        return self.start_date <= time <= self.end_date
 
     @property
     def get_results(self):
-        if self.end_date > timezone.now():
+        timezone.localtime()
+        if self.end_date < timezone.localtime():
             return None
         
-        results = {}
+        results = []
         for competition in self.competitions.all():
             votes = CompetitionVote.objects.filter(competition=competition)
 
+            competition_turn = []
+
             for candidate in [competition.candidate_a, competition.candidate_b]:
-                results[candidate.id] = {
+                percentage = votes.filter(candidate_option=candidate).count() / votes.count() if votes.count() else 0
+                percentage = round(percentage * 100, 2)
+                competition_turn.append({
                     "data": candidate,
-                    "votes": 0
-                }
+                    "votes": votes.filter(candidate_option=candidate).count(),
+                    "percentage": percentage,
+                })
+
+            results.append(competition_turn)
 
         return results
 
@@ -61,9 +72,12 @@ class CompetitionVote(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
 
     def verify_vote(self):
-        is_on_time = self.competition.tournament.start_date <= self.created_at <= self.competition.tournament.end_date
+        tournament = self.competition.tournament
+        is_on_time = tournament.is_on_time(self.created_at)
         duration = self.competition.tournament.vote_interval
-        last_ip_vote = CompetitionVote.objects.filter(ip_address=self.ip_address, created_at__gte=timezone.now() - duration).first()
+        duration = timezone.timedelta(minutes=duration)
+
+        last_ip_vote = CompetitionVote.objects.filter(ip_address=self.ip_address, created_at__gte=timezone.localtime() - duration).first()
         return is_on_time and not last_ip_vote
 
     def __str__(self):

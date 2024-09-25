@@ -1,26 +1,18 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static results %}
 
 {% block content %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/templates/tournament/no_tournament.css' %}">
 
     <div class="container">
-        <div class="no-tournament box">
+        <div class="no-tournament box fade-up">
             <h2>Não há disputas ativas no momento.</h2>
             {% if next_tournament %}
                 A próxima disputa está prevista para <b>{{ next_tournament.start_date|date:"H:m" }}</b>.
             {% else %}
                 <p>Aguarde o início de uma nova disputa.</p>
             {% endif %}
-            {% if last_results %}
-                <hr>
-                <h3>Últimos Resultados</h3>
-                <ul>
-                    {% for result in last_results %}
-                        <li>{{ result }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
+            {% results 'Últimos Resultados' last_results %}
         </div>
     </div>
 {% endblock %}

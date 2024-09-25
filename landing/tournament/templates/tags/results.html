@@ -1,0 +1,32 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/templates/tournament/tags/results.css' %}">
+
+{% if competitions %}
+  <h3 class="results__title">{{title}}</h3>
+  <ul class="results">
+      {% for competition in competitions %}
+          <div class="competition">
+              <div class="result">
+                  <div class="result__data">
+                      <div class="result__number">{{competition.0.data.number}}</div>
+                      <div class="result__name">{{competition.0.data.nick}}</div>
+                      <a href="{{competition.1.data.url}}" target="_blank" class="result__info">Saber mais <i class="fas fa-link"></i></a>
+                  </div>
+                  <img src="{{competition.0.data.image_url}}" alt="Foto de {{competition.0.data.name}}" class="result__photo">
+                  <div class="result__score">{{ competition.0.votes }} Votos ({{competition.0.percentage}}%) </div>
+              </div>
+              <div class="competition__vs">VS</div>
+              <div class="result">
+                  <div class="result__score">{{ competition.1.votes }} Votos ({{competition.1.percentage}}%) </div>
+                  <img src="{{competition.1.data.image_url}}" alt="Foto de {{competition.1.data.name}}" class="result__photo">
+                  <div class="result__data">
+                      <div class="result__number">{{competition.1.data.number}}</div>
+                      <div class="result__name">{{competition.1.data.nick}}</div>
+                      <a href="{{competition.1.data.url}}" target="_blank" class="result__info">Saber mais <i class="fas fa-link"></i></a>
+                  </div>
+              </div>
+          </div>
+      {% endfor %}
+  </ul>
+{% endif %}

@@ -79,6 +79,8 @@ def crawler():
             'election_id': election_id,
             'site_id': candidate_id,
             'municipio': municipio['nome'],
+            'region': 'SUDESTE',
+            'year': '2024',
         }
         return new_candidate
 

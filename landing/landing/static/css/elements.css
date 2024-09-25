@@ -13,12 +13,13 @@ body {
 }
 
 .box {
-    background-color: var(--bg-box);
-    border: 1px solid var(--text-light);
+    background-color: white;
+    /* border: 1px solid var(--text-light); */
     border-radius: 1rem;
     padding: 1rem;
     margin-inline: auto;
     max-width: 75%;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 button {

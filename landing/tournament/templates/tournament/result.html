@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% load static results %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/templates/tournament/result.css' %}">
+    <div class="container">
+      <div class="box result__box">
+        {% results "Resultado" results %}
+        {% if can_vote %}
+          <a href="/" class="btn btn-primary">Votar Novamente</a>
+        {% endif %}
+      </div>
+    </div>
+    <script src="{% static 'js/templates/tournament/result.js' %}"></script>
+{% endblock %}

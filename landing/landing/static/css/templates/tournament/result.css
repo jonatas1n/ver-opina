@@ -1,0 +1,4 @@
+.result__box {
+  display: grid;
+  justify-content: center;
+}

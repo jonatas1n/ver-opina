@@ -2,7 +2,7 @@ from wagtail.models import Page
 
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
-from wagtail.contrib.routable_page.models import RoutablePageMixin, path
+from wagtail.contrib.routable_page.models import RoutablePageMixin, path, route
 
 from django.utils import timezone
 from tournament.models import Tournament
@@ -22,13 +22,13 @@ class LandingPage(RoutablePageMixin, Page):
         FieldPanel("heading"),
     ]
 
-    @path("")
+    @route(r'^$')
     def index(self, request):
         return index(request)
     
-    @path("result")
+    @path("result/")
     def result(self, request):
-        result(request)
+        return result(request)
 
     @property
     def actual_tournament(self):
@@ -39,5 +39,5 @@ class LandingPage(RoutablePageMixin, Page):
     
     @property
     def last_result(self):
-        last_tournament = Tournament.objects.filter(end_date__lte=timezone.now()).order_by("-end_date").first()
+        last_tournament = Tournament.objects.filter(end_date__lte=timezone.localtime()).order_by("-end_date").first()
         return last_tournament.get_results if last_tournament else None

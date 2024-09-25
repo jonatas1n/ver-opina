@@ -2,6 +2,7 @@ form {
   display: grid;
   gap: 1rem;
   justify-content: center;
+  justify-items: center;
 }
 
 .tournament {
@@ -14,14 +15,27 @@ button.tournament__btn {
   color: var(--text-light);
 }
 
+button.tournament__btn:disabled {
+  color: #BBB;
+}
+
+button.tournament__btn:disabled:hover {
+  cursor: not-allowed;
+  color: #BBB;
+}
+
 button.tournament__btn:hover {
   box-shadow: none;
   color: var(--text);
 }
 
-form .field__competition {
+form .field__competition.selected {
   display: grid;
-  grid-template-columns: 24rem 6rem 24rem;
+}
+
+form .field__competition {
+  display: none;
+  grid-template-columns: minmax(18rem, 24rem) 6rem minmax(18rem, 24rem);
   justify-content: center;
 
   background-color: white;
@@ -43,4 +57,71 @@ form .field__competition .card:last-of-type {
   font-size: 2rem;
   color: #666;
   align-self: center;
+  height: 3rem;
+  display: grid;
+  place-items: center;
+}
+
+.submit-btn {
+  background-color: white;
+  color: var(--text);
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+.submit-btn:disabled {
+  background-color: #BBB;
+  cursor: not-allowed;
+}
+
+
+@media screen and (max-width: 1210px) {
+  header {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  form .field__competition {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+
+  button.tournament__btn {
+    font-size: .75em;
+  }
+
+  form .field__competition .card:last-of-type {
+    grid-column: 1;
+  }
+
+  button.tournament__btn.next-btn {
+    justify-self: flex-end;
+  }
+
+  .card-vs {
+    grid-column: 1;
+    grid-row: 2;
+    margin-bottom: 1rem;
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .tournament {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-flow: unset;
+    justify-items: center;
+  }
+
+  button.tournament__btn.next-btn {
+    justify-self: center;
+  }
+
+  .next-btn {
+    grid-row: 1;
+    grid-column: 2;
+  }
+
+  form {
+    grid-column: span 2;
+  }
 }

@@ -16,4 +16,4 @@ class Command(BaseCommand):
             if was_created:
                 print(f"Partido criado: {party}")
             candidate['party'] = party
-            Candidate.objects.create(**candidate)
+            Candidate.objects.get_or_create(**candidate)
