@@ -4,6 +4,7 @@
 
 .competition {
   display: grid;
+  align-items: center;
   grid-template-columns: 20rem 6rem 20rem;
 }
 
@@ -61,4 +62,55 @@
   border-radius: 1rem;
   color: white;
   text-decoration: none;
+}
+
+@media screen and (max-width: 1200px) {
+  .competition {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1rem 1fr;
+    gap: .5rem;
+    background-color: #f5f5f5;
+    padding: .5rem;
+    border-radius: .5rem;
+  }
+
+  .result__info__text {
+    display: none;
+  }
+
+  .competition__vs {
+    grid-column: 1;
+    grid-row: 2;
+    height: unset;
+    font-size: 1rem;
+    align-self: center;
+  }
+
+  .result {
+    grid-column: 1;
+    text-align: right;
+  }
+
+  .result .result__score {
+    text-align: left;
+  }
+
+  .result:nth-child(3) {
+    grid-template-columns: 2fr repeat(2, 1fr);
+  }
+
+  .result:nth-child(3) .result__score {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .result:nth-child(3) .result__photo {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .result:nth-child(3) .result__data {
+    grid-column: 1;
+    grid-row: 1;
+  }
 }

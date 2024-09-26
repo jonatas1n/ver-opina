@@ -69,3 +69,14 @@ body {
 .messages li:last-child {margin-bottom: 0;}
 
 .field-row select {height: 3rem;}
+
+@media screen and (max-width: 1200px) {
+    .box {
+        max-width: 100%;
+        margin-inline: 0;
+    }
+
+    .container {
+        width: calc(100% - 2rem);
+    }
+}
