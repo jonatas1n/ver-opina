@@ -3,7 +3,7 @@ services:
     name: landing-web
     env: python
     buildCommand: "./landing/run.sh"
-    startCommand: "gunicorn landing.wsgi --bind 0.0.0.0:$PORT"
+    startCommand: "poetry run python manage.py migrate && gunicorn landing.wsgi --bind 0.0.0.0:$PORT"
     envVars:
       - key: POSTGRES_PORT
         value: "5656"
