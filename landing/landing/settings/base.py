@@ -107,7 +107,7 @@ WSGI_APPLICATION = "landing.wsgi.application"
 DATABASES = {
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.
-        default="postgres://postgres:postgres@localhost:5432/landing",
+        default="postgres://postgres:postgres@localhost:5432/ver_opina",
         conn_max_age=600
     )
 }
