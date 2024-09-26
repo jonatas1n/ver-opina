@@ -13,7 +13,6 @@ PORT = os.environ.get('PORT', 8000)
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-    
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
