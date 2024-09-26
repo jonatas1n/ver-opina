@@ -8,4 +8,5 @@ python manage.py findstatic .
 python manage.py collectstatic --noinput
 poetry install
 poetry add gunicorn
+echo " jovem dev"
 gunicorn landing.wsgi:application --bind 0.0.0.0:$PORT
