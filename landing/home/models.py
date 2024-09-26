@@ -9,6 +9,7 @@ from tournament.models import Tournament
 
 from home.views import index, result
 
+
 class LandingPage(RoutablePageMixin, Page):
     is_creatable = False
 
@@ -22,10 +23,10 @@ class LandingPage(RoutablePageMixin, Page):
         FieldPanel("heading"),
     ]
 
-    @route(r'^$')
+    @route(r"^$")
     def index(self, request):
         return index(request)
-    
+
     @path("result/")
     def result(self, request):
         return result(request)
@@ -36,8 +37,12 @@ class LandingPage(RoutablePageMixin, Page):
         if not active_tournament:
             return None
         return active_tournament
-    
+
     @property
     def last_result(self):
-        last_tournament = Tournament.objects.filter(end_date__lte=timezone.localtime()).order_by("-end_date").first()
+        last_tournament = (
+            Tournament.objects.filter(end_date__lte=timezone.localtime())
+            .order_by("-end_date")
+            .first()
+        )
         return last_tournament.get_results if last_tournament else None

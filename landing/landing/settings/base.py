@@ -18,7 +18,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 TAGGIT_CASE_INSENSITIVE = True
 
-DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 WAGTAILSTREAMFORMS_ENABLE_FORM_PROCESSING = False
 
@@ -139,7 +139,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "pt-br"
 
-TIME_ZONE = 'America/Sao_Paulo'
+TIME_ZONE = "America/Sao_Paulo"
 
 USE_I18N = True
 

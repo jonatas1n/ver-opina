@@ -3,6 +3,7 @@ from candidate.models import Candidate, Party
 
 from candidate.crawler import crawler
 
+
 class Command(BaseCommand):
     help = "Extracts the data from the database and saves it to a file"
 
@@ -11,9 +12,9 @@ class Command(BaseCommand):
         print(f"Total de candidatos: {len(candidates)}")
 
         for candidate in candidates:
-            party = candidate.pop('nomeColigacao')
+            party = candidate.pop("nomeColigacao")
             party, was_created = Party.objects.get_or_create(party_name=party)
             if was_created:
                 print(f"Partido criado: {party}")
-            candidate['party'] = party
+            candidate["party"] = party
             Candidate.objects.get_or_create(**candidate)
