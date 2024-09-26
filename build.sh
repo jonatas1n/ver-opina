@@ -3,7 +3,6 @@ echo "source $(poetry env info --path)/bin/activate" >> /root/.bashrc
 source $(poetry env info --path)/bin/activate
 
 python manage.py migrate
-python manage.py migrate
 python manage.py findstatic .
 python manage.py collectstatic --noinput
 poetry install
