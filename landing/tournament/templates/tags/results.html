@@ -11,7 +11,9 @@
                   <div class="result__data">
                       <div class="result__number">{{competition.0.data.number}}</div>
                       <div class="result__name">{{competition.0.data.nick}}</div>
-                      <a href="{{competition.1.data.url}}" target="_blank" class="result__info">Saber mais <i class="fas fa-link"></i></a>
+                      <a href="{{competition.1.data.url}}" target="_blank" class="result__info">
+                        <span class="result__info__text">Saber mais</span> <i class="fas fa-circle-info"></i>
+                      </a>
                   </div>
                   <img src="{{competition.0.data.image_url}}" alt="Foto de {{competition.0.data.name}}" class="result__photo">
                   <div class="result__score">{{ competition.0.votes }} Votos ({{competition.0.percentage}}%) </div>
@@ -23,7 +25,9 @@
                   <div class="result__data">
                       <div class="result__number">{{competition.1.data.number}}</div>
                       <div class="result__name">{{competition.1.data.nick}}</div>
-                      <a href="{{competition.1.data.url}}" target="_blank" class="result__info">Saber mais <i class="fas fa-link"></i></a>
+                      <a href="{{competition.1.data.url}}" target="_blank" class="result__info">
+                        <span class="result__info__text">Saber mais</span> <i class="fas fa-circle-info"></i>
+                      </a>
                   </div>
               </div>
           </div>
