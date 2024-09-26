@@ -2,7 +2,7 @@ services:
   - type: web
     name: landing-web
     env: python
-    buildCommand: "./build.sh"
+    buildCommand: "./landing/run.sh"
     startCommand: "gunicorn landing.wsgi --bind 0.0.0.0:$PORT"
     envVars:
       - key: POSTGRES_PORT
@@ -19,6 +19,6 @@ services:
     autoDeploy: true
 
 databases:
-  - name: landing-db
-    databaseName: landing
+  - name: ver_opina
+    databaseName: ver_opina
     user: root
