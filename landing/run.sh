@@ -6,9 +6,5 @@ poetry run python manage.py migrate
 poetry run python manage.py findstatic .
 poetry run python manage.py collectstatic --noinput
 poetry run poetry install
-if [ "$1" == "prod" ]; then
-    poetry run poetry add gunicorn
-    poetry run gunicorn landing.wsgi:application --bind 0.0.0.0:$PORT
-else
-    poetry run python manage.py runserver 0.0.0.0:$PORT
-fi
+poetry run poetry add gunicorn
+poetry run gunicorn landing.wsgi:application --bind 0.0.0.0:$PORT
