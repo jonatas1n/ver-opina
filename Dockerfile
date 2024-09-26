@@ -7,3 +7,4 @@ ENV PATH /root/.local/bin:$PATH
 COPY landing /landing
 WORKDIR landing
 RUN poetry install
+EXPOSE 10000
