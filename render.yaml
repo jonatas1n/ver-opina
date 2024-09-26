@@ -15,16 +15,6 @@ services:
         value: "adminroot"
       - key: POSTGRES_HOST
         value: "landing_db"
-    # routes:
-    #   - type: web
-    #     name: landing-web-route
-    #     source:
-    #       type: path
-    #       path: /*
-    #     destination:
-    #       type: service
-    #       name: landing-web
-    #       port: 10000
     healthCheckPath: "/"
     autoDeploy: true
 
@@ -32,4 +22,3 @@ databases:
   - name: landing-db
     databaseName: landing
     user: root
-    
