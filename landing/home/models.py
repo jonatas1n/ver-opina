@@ -11,7 +11,8 @@ from home.views import index, result
 
 
 class LandingPage(RoutablePageMixin, Page):
-    is_creatable = False
+    max_count = 1
+    is_creatable = True
 
     heading = RichTextField(
         null=False,
