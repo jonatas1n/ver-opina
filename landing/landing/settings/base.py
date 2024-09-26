@@ -32,7 +32,6 @@ POSTGRES_HOST = os.environ.get("POSTGRES_HOST")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -106,14 +105,6 @@ WSGI_APPLICATION = "landing.wsgi.application"
 
 
 DATABASES = {
-    # "default": {
-    #     "ENGINE": "django.db.backends.postgresql_psycopg2",
-    #     "NAME": POSTGRES_DB,
-    #     "USER": POSTGRES_USER,
-    #     "PASSWORD": POSTGRES_PASSWORD,
-    #     "HOST": POSTGRES_HOST,
-    #     "PORT": POSTGRES_PORT,
-    # }
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.
         default="postgres://postgres:postgres@localhost:5432/landing",
