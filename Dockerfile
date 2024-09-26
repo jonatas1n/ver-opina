@@ -10,6 +10,4 @@ RUN poetry install
 
 EXPOSE 8000
 
-RUN poetry run python manage.py migrate
-
 CMD poetry run gunicorn landing.wsgi:application --bind 0.0.0.0:$PORT
