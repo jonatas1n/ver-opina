@@ -2,3 +2,8 @@
   display: grid;
   justify-content: center;
 }
+
+.btn {
+  background-color: white;
+  margin-inline: auto;
+}

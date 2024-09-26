@@ -22,7 +22,7 @@ body {
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
-button {
+:is(button, .btn) {
     padding: 10px;
     background-color: var(--dark-blue);
     color: white;
@@ -34,12 +34,12 @@ button {
     width: fit-content;
 }
 
-button :disabled {
+:is(button, .btn) :disabled {
     background-color: #666;
     border-color: white;
 }
 
-button:hover:not(:disabled) {
+:is(button, .btn):hover:not(:disabled) {
     cursor: pointer;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
