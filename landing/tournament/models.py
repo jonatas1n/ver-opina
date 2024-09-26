@@ -34,10 +34,11 @@ class Tournament(Page, ClusterableModel):
     
     def can_vote(self, request):
         if not self.is_on_time():
+            print("Not on time")
             return False
         access_ip = request.META.get("REMOTE_ADDR")
         last_vote = CompetitionVote.objects.filter(ip_address=access_ip, created_at__gte=timezone.localtime() - timezone.timedelta(minutes=self.vote_interval)).first()
-        return not last_vote is None
+        return last_vote is None
 
     @property
     def get_results(self):

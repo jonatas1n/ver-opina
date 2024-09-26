@@ -37,5 +37,7 @@ def result(request):
         return redirect("/")
     
     can_vote = active_tournament.can_vote(request)
+    remaining_time = active_tournament.start_date - timezone.localtime()
+    remaining_time = remaining_time.total_seconds()
     results = active_tournament.get_results
-    return render(request, "tournament/result.html", {"tournament": active_tournament, "results": results, "can_vote": can_vote})
+    return render(request, "tournament/result.html", {"tournament": active_tournament, "results": results, "can_vote": can_vote, "remaining_time": remaining_time})

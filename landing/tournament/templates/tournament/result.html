@@ -8,9 +8,36 @@
       <div class="box result__box">
         {% results "Resultado" results %}
         {% if can_vote %}
-          <a href="/" class="btn btn-primary">Votar Novamente</a>
+          <a href=".." class="btn btn-primary">Votar Novamente</a>
+        {% else %}
+          <div id="counter">
+            <div class="counter__text">
+              Você poderá votar novamente em <span id="counter__time">{{ time }}</span>
+            </div>
+            <a href=".." class="btn counter__btn hide">Votar novamente</a>
+          </div>
         {% endif %}
       </div>
     </div>
-    <script src="{% static 'js/templates/tournament/result.js' %}"></script>
+
+    <script>
+      const counter = document.getElementById('counter__time');
+      const counterText = document.querySelector('.counter__text');
+      const counterButton = document.querySelector('.counter__btn');
+      function startCounter(remainingTimeSeconds) {
+        let remainingTime = remainingTimeSeconds;
+        const interval = setInterval(() => {
+          remainingTime -= 1;
+          if (remainingTime <= 0) {
+            clearInterval(interval);
+            counterButton.classList.remove('hide');
+            counterText.classList.add('hide');
+            counter.remove();
+            return
+          }
+          counter.innerText = remainingTime;
+        }, 1000);
+      }
+      startCounter({{ remaining_time }});
+    </script>
 {% endblock %}
