@@ -7,4 +7,7 @@ ENV PATH /root/.local/bin:$PATH
 COPY landing /landing
 WORKDIR landing
 RUN poetry install
-EXPOSE 10000
+
+EXPOSE 8000
+
+CMD gunicorn nome_do_projeto.wsgi:application --bind 0.0.0.0:$PORT
