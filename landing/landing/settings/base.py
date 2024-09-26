@@ -105,11 +105,14 @@ WSGI_APPLICATION = "landing.wsgi.application"
 
 
 DATABASES = {
-    'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default="postgres://postgres:postgres@localhost:5432/landing",
-        conn_max_age=600
-    )
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": POSTGRES_DB,
+        "USER": POSTGRES_USER,
+        "PASSWORD": POSTGRES_PASSWORD,
+        "HOST": POSTGRES_HOST,
+        "PORT": POSTGRES_PORT,
+    }
 }
 
 
