@@ -2,33 +2,37 @@ services:
   - type: web
     name: landing-web
     env: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn landing.wsgi:application --bind 0.0.0.0:10000"
+    buildCommand: "./landing/run.sh"
+    startCommand: "python -m gunicorn landing.asgi:application -k uvicorn.workers.UvicornWorker"
     envVars:
-      POSTGRES_PORT: 5656
-      POSTGRES_DB: landing
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: adminroot
-      POSTGRES_HOST: landing_db
-    databases:
-      - name: landing-db
-        databaseName: landing
-        user: root
-        password: adminroot
-        host: landing_db
-        port: 5656
-        type: postgresql
-    disk:
-      size: 1GB
-    routes:
-      - type: web
-        name: landing-web-route
-        source:
-          type: path
-          path: /*
-        destination:
-          type: service
-          name: landing-web
-          port: 10000
+      - key: POSTGRES_PORT
+        value: "5656"
+      - key: POSTGRES_DB
+        value: "landing"
+      - key: POSTGRES_USER
+        value: "root"
+      - key: POSTGRES_PASSWORD
+        value: "adminroot"
+      - key: POSTGRES_HOST
+        value: "landing_db"
+    # routes:
+    #   - type: web
+    #     name: landing-web-route
+    #     source:
+    #       type: path
+    #       path: /*
+    #     destination:
+    #       type: service
+    #       name: landing-web
+    #       port: 10000
     healthCheckPath: "/"
     autoDeploy: true
+
+databases:
+  - name: landing-db
+    databaseName: landing
+    user: root
+    password: adminroot
+    host: landing_db
+    port: 5656
+    type: postgresql
