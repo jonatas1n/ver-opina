@@ -9,7 +9,7 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 # SECURITY WARNING: define the correct hosts in production!
 # ALLOWED_HOSTS = [os.environ["HOST"]]
 
-PORT = os.environ.get('PORT', 10000)
+PORT = os.environ.get('PORT', 8000)
 
 ALLOWED_HOSTS = ['*']
 
