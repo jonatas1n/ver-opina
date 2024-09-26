@@ -32,7 +32,4 @@ databases:
   - name: landing-db
     databaseName: landing
     user: root
-    password: adminroot
-    host: landing_db
-    port: 5656
-    type: postgresql
+    
