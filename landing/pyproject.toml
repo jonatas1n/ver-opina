@@ -15,8 +15,9 @@ django-environ = "^0.11.2"
 environ = "^1.0"
 black = "^24.8.0"
 wagtail-modeladmin = "^2.0.0"
-whitenoise = "^6.7.0"
+whitenoise = {extras = ["brotli"], version = "^6.7.0"}
 gunicorn = "^23.0.0"
+dj-database-url = "^2.2.0"
 
 [tool.poetry.dev-dependencies]
 

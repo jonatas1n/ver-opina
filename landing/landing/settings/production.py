@@ -11,6 +11,10 @@ ALLOWED_HOSTS = [os.environ["HOST"]]
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
+    
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 try:
     from .local import *
 except ImportError:
