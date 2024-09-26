@@ -10,4 +10,4 @@ RUN poetry install
 
 EXPOSE 8000
 
-CMD poetry run sh build.sh && poetry run gunicorn landing.wsgi:application --bind 0.0.0.0:$PORT
+CMD poetry run sh ./build.sh && poetry run gunicorn landing.wsgi:application --bind 0.0.0.0:$PORT
