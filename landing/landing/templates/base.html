@@ -69,6 +69,14 @@
         {% include 'header.html' %}
 
         {% block content %}{% endblock %}
+        <br>
+        <br>
+        <br>
+        {% if user.is_superuser %}
+            <div class="container">
+                <a style="color: black; text-align:center;" class="btn" href="/admin">Acessar área administrativa</a>
+            </div>
+        {% endif %}
     </div>
     {# Global javascript #}
 
