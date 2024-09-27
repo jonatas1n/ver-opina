@@ -6,7 +6,7 @@ from wagtail.admin.panels import FieldPanel, InlinePanel
 from modelcluster.fields import ParentalKey
 
 
-class Tournament(Page, ClusterableModel):
+class Tournament(ClusterableModel):
     parent_page_types = ["home.LandingPage"]
 
     start_date = models.DateTimeField(verbose_name="Data de início")
