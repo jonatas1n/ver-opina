@@ -7,6 +7,10 @@ from modelcluster.fields import ParentalKey
 
 
 class Tournament(ClusterableModel):
+    class Meta:
+        verbose_name = "Torneio"
+        verbose_name_plural = "Torneios"
+
     parent_page_types = ["home.LandingPage"]
 
     start_date = models.DateTimeField(verbose_name="Data de início")

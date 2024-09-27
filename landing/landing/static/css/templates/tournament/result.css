@@ -4,6 +4,6 @@
 }
 
 .btn {
-  background-color: white;
+  background-color: var(--primary);
   margin-inline: auto;
 }
