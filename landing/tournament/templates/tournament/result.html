@@ -9,7 +9,8 @@
         {% results "Resultado" results %}
         {% if can_vote %}
           <a href=".." class="btn btn-primary">Votar Novamente</a>
-        {% else %}
+        {% elif remaining_time %}
+
           <div id="counter" class="hide">
             <div class="counter__text">
               Você poderá votar novamente em <span id="counter__time">{{ time }}</span>
