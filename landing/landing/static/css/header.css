@@ -18,7 +18,10 @@ header {
 
 @media screen and (max-width: 1210px) {
     header {
-        margin-top: 0;
-        margin-bottom: 1rem;
+        margin-block: 0;
+    }
+
+    .header__content h3 {
+        display: none;
     }
 }

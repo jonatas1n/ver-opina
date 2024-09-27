@@ -53,3 +53,9 @@ input:checked + .card {
     width: 10rem;
   }
 }
+
+@media screen and (max-width: 660px) {
+  .card__image {
+    width: 7rem;
+  }
+}

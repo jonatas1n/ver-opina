@@ -4,9 +4,9 @@
   <input type="radio" name="{{name}}" value="{{ value }}" required id="candidate-{{ candidate.id }}" class="card__radio">
   <div class="card">
     <img src="{{ candidate.image_url }}" alt="{{ option.name }}" class="card__image">
-    <h2>{{ candidate.nick }}</h2>
+    <h2 class="candidate__nick">{{ candidate.nick }}</h2>
     <h3 class="candidate__name">{{ candidate.name }}</h3>
-    <h3>{{ candidate.number }}</h3>
+    <h3 class="candidate__number">{{ candidate.number }}</h3>
     <h4>{{ candidate.party }}</h4>
     <h4 class="candidate__city">{{ candidate.municipio }}-{{ candidate.uf }}</h4>
   </div>
