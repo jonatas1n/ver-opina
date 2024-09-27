@@ -6,4 +6,5 @@
 .btn {
   background-color: var(--primary);
   margin-inline: auto;
+  text-decoration: none;
 }
