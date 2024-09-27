@@ -17,12 +17,14 @@ class LandingPage(RoutablePageMixin, Page):
     heading = models.CharField(
         null=True,
         blank=True,
+        max_length=127,
         verbose_name="Título",
     )
 
     subheading = models.CharField(
         null=True,
         blank=True,
+        max_length=127,
         verbose_name="Subtítulo",
     )
 
