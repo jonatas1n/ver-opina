@@ -15,13 +15,6 @@ class Tournament(ClusterableModel):
         verbose_name="Intervalo entre os votos (em minutos)", default=15
     )
 
-    content_panels = Page.content_panels + [
-        FieldPanel("start_date"),
-        FieldPanel("end_date"),
-        FieldPanel("vote_interval"),
-        InlinePanel("competitions", label="Competições"),
-    ]
-
     @staticmethod
     def active_tournament():
         tournament = Tournament.objects.filter(
