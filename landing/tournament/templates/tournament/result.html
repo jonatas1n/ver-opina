@@ -10,7 +10,7 @@
         {% if can_vote %}
           <a href=".." class="btn btn-primary">Votar Novamente</a>
         {% else %}
-          <div id="counter">
+          <div id="counter" class="hide">
             <div class="counter__text">
               Você poderá votar novamente em <span id="counter__time">{{ time }}</span>
             </div>
@@ -24,8 +24,12 @@
       const counter = document.getElementById('counter__time');
       const counterText = document.querySelector('.counter__text');
       const counterButton = document.querySelector('.counter__btn');
+
       function startCounter(remainingTimeSeconds) {
         let remainingTime = remainingTimeSeconds;
+        if (remainingTime > 0) {
+          counter.classList.remove('hide');
+        }
         const interval = setInterval(() => {
           remainingTime -= 1;
           if (remainingTime <= 0) {
