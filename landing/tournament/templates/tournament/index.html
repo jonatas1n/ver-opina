@@ -21,7 +21,7 @@
           <div class="fields">
             {% for field in form %}
               {% if forloop.first %}
-                <div class="field__competition fade-left selected first">
+                <div class="field__competition fade-left selected first {% if form|length == 0 %} last {% endif %}">
               {% elif forloop.last %}
                 <div class="field__competition fade-left last">
               {% else %}

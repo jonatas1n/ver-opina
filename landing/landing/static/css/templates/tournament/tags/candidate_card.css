@@ -40,6 +40,11 @@ input:checked + .card {
 }
 
 @media screen and (max-width: 1210px) {
+  .card h2 {
+    margin-top: .25rem;
+    font-size: 1.25rem;
+  }
+
   .candidate__name, .candidate__city {
     display: none;
   }

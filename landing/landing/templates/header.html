@@ -1,5 +1,8 @@
-{% load wagtailcore_tags wagtailimages_tags static %}
+{% load wagtailcore_tags wagtailimages_tags heading subheading static %}
 
 <header>
-	<h1>Qual será o mais votado?</h1>
+	<div class="header__content">
+		<h1>{% heading %}</h1>
+		<h3>{% subheading %}</h3>
+	</div>
 </header>
