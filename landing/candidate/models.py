@@ -37,7 +37,7 @@ class Candidate(models.Model):
             "https://divulgacandcontas.tse.jus.br/divulga/#/candidato/{}/{}/{}/{}/{}/{}"
         )
         return url.format(
-            self.region, self.uf, self.year, self.site_id, self.year, self.municipio_id
+            self.region, self.uf, self.election_id, self.site_id, self.year, self.municipio_id
         )
 
     def __str__(self):

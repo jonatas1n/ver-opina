@@ -1,8 +1,7 @@
 from django.db import models
 from django.utils import timezone
 
-from wagtail.models import Page, ClusterableModel
-from wagtail.admin.panels import FieldPanel, InlinePanel
+from wagtail.models import ClusterableModel
 from modelcluster.fields import ParentalKey
 
 
@@ -93,6 +92,9 @@ class Competition(models.Model):
         candidate_b = self.candidate_b.name
         return f"{candidate_a} x {candidate_b}"
 
+    class Meta:
+        verbose_name = "Competição"
+        verbose_name_plural = "Competições"
 
 class CompetitionVote(models.Model):
     competition = models.ForeignKey(Competition, on_delete=models.CASCADE)
@@ -104,3 +106,7 @@ class CompetitionVote(models.Model):
 
     def __str__(self):
         return f"{self.competition} - {self.ip_address}"
+    
+    class Meta:
+        verbose_name = "Voto"
+        verbose_name_plural = "Votos"
