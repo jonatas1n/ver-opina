@@ -89,7 +89,9 @@ class Competition(models.Model):
     )
 
     def __str__(self):
-        return self.competition_name
+        candidate_a = self.candidate_a.name
+        candidate_b = self.candidate_b.name
+        return f"{candidate_a} x {candidate_b}"
 
 
 class CompetitionVote(models.Model):
@@ -101,4 +103,4 @@ class CompetitionVote(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return f"{self.competition} - {self.candidate}"
+        return f"{self.competition} - {self.ip_address}"

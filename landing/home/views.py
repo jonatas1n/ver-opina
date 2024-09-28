@@ -34,7 +34,7 @@ def index(request):
 
     form = VoteForm(active_tournament.competitions.all(), request.POST)
     if form.is_valid() and active_tournament.can_vote(request):
-        form.save()
+        form.save(request)
         return redirect("/result")
 
     return render(

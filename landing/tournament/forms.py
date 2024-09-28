@@ -15,14 +15,15 @@ class VoteForm(forms.Form):
                 label=str(competition.id), choices=candidates, widget=forms.RadioSelect
             )
 
-    def save(self):
+    def save(self, request):
         from tournament.models import CompetitionVote
 
         votes = []
         for competition in self.competitions:
             candidate_id = self.cleaned_data.get(f"competition_{competition.id}")
+            user_ip = request.META.get("REMOTE_ADDR")
             vote = CompetitionVote(
-                competition=competition, candidate_option_id=candidate_id
+                competition=competition, candidate_option_id=candidate_id, ip_address=user_ip
             )
             votes.append(vote)
 
